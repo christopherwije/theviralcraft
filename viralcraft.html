@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ViralCraft - Digital Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === RESET & BASE === */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Instrument Sans', sans-serif;
+    color: #111111;
+    font-size: 11pt;
+    line-height: 1.6;
+}
+
+/* === PAGE SETUP === */
+@page {
+    size: A4;
+    margin: 2cm 2cm 2.5cm 2cm;
+    @top-center { content: string(doctitle); font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: #999; letter-spacing: 0.1em; text-transform: uppercase; }
+    @bottom-center { content: counter(page); font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: #999; }
+}
+@page :first { margin: 0; @top-center { content: none; } @bottom-center { content: none; } }
+@page cover { @top-center { content: none; } @bottom-center { content: none; } }
+
+body { string-set: doctitle ""; }
+h1.section-title { string-set: doctitle content(); }
+
+/* === COVER === */
+.cover {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    page: cover;
+    page-break-after: always;
+    background: #111111;
+}
+.cover-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 8mm;
+    background: #FFF200;
+}
+.cover-accent-bottom {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 4mm;
+    background: #FFF200;
+}
+.cover-stripe {
+    position: absolute;
+    top: 0; right: 25mm;
+    width: 3mm; height: 100%;
+    background: #FFF200;
+    opacity: 0.3;
+}
+.cover-stripe2 {
+    position: absolute;
+    top: 0; right: 32mm;
+    width: 1mm; height: 100%;
+    background: #FFF200;
+    opacity: 0.15;
+}
+.cover-dot {
+    position: absolute;
+    width: 120mm; height: 120mm;
+    border-radius: 50%;
+    border: 1mm solid #FFF200;
+    opacity: 0.08;
+    bottom: -30mm; right: -30mm;
+}
+.cover-dot2 {
+    position: absolute;
+    width: 80mm; height: 80mm;
+    border-radius: 50%;
+    border: 0.5mm solid #FFF200;
+    opacity: 0.06;
+    top: 40mm; left: -20mm;
+}
+.cover-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+}
+.cover-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10pt;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #FFF200;
+    margin-bottom: 15mm;
+}
+.cover-title {
+    font-size: 32pt;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 8mm;
+    letter-spacing: -0.5pt;
+}
+.cover-subtitle {
+    font-size: 13pt;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    margin-bottom: 20mm;
+}
+.cover-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+/* === TYPOGRAPHY === */
+h1.section-title {
+    font-size: 22pt;
+    font-weight: 600;
+    color: #111111;
+    margin-top: 0;
+    margin-bottom: 6mm;
+    letter-spacing: -0.3pt;
+    page-break-after: avoid;
+}
+h2 {
+    font-size: 14pt;
+    font-weight: 600;
+    color: #111111;
+    margin-top: 8mm;
+    margin-bottom: 3mm;
+    page-break-after: avoid;
+}
+h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    color: #111111;
+    margin-top: 5mm;
+    margin-bottom: 2mm;
+    page-break-after: avoid;
+}
+.label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-bottom: 2mm;
+}
+.accent-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #b8a800;
+    margin-bottom: 2mm;
+}
+p {
+    margin: 0 0 3mm 0;
+    color: #444;
+}
+
+/* === SECTIONS === */
+.section {
+    margin-bottom: 10mm;
+}
+.page-break {
+    page-break-before: always;
+}
+
+/* === SERVICES TABLE === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4mm 0;
+    font-size: 10pt;
+    max-width: 100%;
+}
+thead { display: table-header-group; }
+thead tr {
+    border-top: 2px solid #111111;
+    border-bottom: 1px solid #111111;
+}
+th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #666;
+    padding: 3mm 2mm;
+    text-align: left;
+    font-weight: 400;
+}
+td {
+    padding: 4mm 2mm;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: top;
+}
+tr { page-break-inside: avoid; }
+td.num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    color: #999;
+    width: 8%;
+}
+td.title {
+    font-weight: 600;
+    color: #111111;
+    width: 30%;
+}
+td.desc {
+    color: #555;
+    width: 62%;
+}
+
+/* === PORTFOLIO LIST === */
+.portfolio-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 4mm 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    page-break-inside: avoid;
+}
+.portfolio-name {
+    font-size: 13pt;
+    font-weight: 600;
+    color: #111111;
+}
+.portfolio-industry {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #999;
+}
+
+/* === LEADERSHIP === */
+.leader-card {
+    display: flex;
+    gap: 8mm;
+    margin-top: 5mm;
+}
+.leader-photo {
+    width: 45mm;
+    height: 55mm;
+    object-fit: cover;
+    border-radius: 3mm;
+    flex-shrink: 0;
+}
+.leader-info {
+    flex: 1;
+}
+
+/* === CONTACT BOX === */
+.contact-box {
+    background: #f7f7f7;
+    border-left: 3px solid #FFF200;
+    padding: 5mm 6mm;
+    margin: 5mm 0;
+}
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    margin-bottom: 2mm;
+    font-size: 10pt;
+    color: #444;
+}
+.contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    width: 20mm;
+    flex-shrink: 0;
+}
+
+/* === PHILOSOPHY FLOW === */
+.flow {
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+    margin: 5mm 0;
+    flex-wrap: wrap;
+}
+.flow-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    color: #444;
+    background: #f7f7f7;
+    padding: 2mm 4mm;
+    border-radius: 2mm;
+}
+.flow-arrow {
+    color: #b8a800;
+    font-size: 12pt;
+}
+
+/* === UTILITY === */
+.yellow-bar {
+    display: inline-block;
+    width: 12mm;
+    height: 2mm;
+    background: #FFF200;
+    margin-bottom: 4mm;
+}
+.two-col {
+    display: flex;
+    gap: 8mm;
+}
+.two-col > div {
+    flex: 1;
+}
+
+/* === OVERFLOW PREVENTION === */
+pre, table, figure, img, svg, blockquote {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+a { word-break: break-all; color: #111111; }
+
+/* === FOOTER === */
+.doc-footer {
+    margin-top: 15mm;
+    padding-top: 5mm;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+.doc-footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+    <div class="cover-accent"></div>
+    <div class="cover-accent-bottom"></div>
+    <div class="cover-stripe"></div>
+    <div class="cover-stripe2"></div>
+    <div class="cover-dot"></div>
+    <div class="cover-dot2"></div>
+    <div class="cover-content">
+        <div class="cover-brand">ViralCraft</div>
+        <h1 class="cover-title">We Craft Ideas That Go Viral &mdash; And Build Brands That Last</h1>
+        <p class="cover-subtitle">Create. Connect. Go Viral. Build Brands.<br>A Digital Research Institute Pvt. Ltd. Company</p>
+        <div class="cover-meta">Company Profile &amp; Capabilities</div>
+    </div>
+</div>
+
+<!-- ==================== ABOUT ==================== -->
+<div class="section">
+    <div class="accent-label">About ViralCraft</div>
+    <h1 class="section-title">We bridge the gap between creative storytelling and analytical research</h1>
+    <div class="yellow-bar"></div>
+    <p>ViralCraft is a premier, data-driven digital marketing and creative agency specializing in high-impact viral campaigns and full-service monthly social media management. We bridge the gap between creative storytelling and analytical research to engineer powerful digital growth for modern brands.</p>
+    <p>We don't believe in vanity metrics or short-lived hype. Our strategic approach ensures that high-visibility campaigns translate into long-term brand equity and sustainable customer engagement.</p>
+    
+    <h2>Our Core Philosophy</h2>
+    <div class="flow">
+        <span class="flow-step">Deep Audience Research</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">Strategic Content Creation</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">High-Impact Execution</span>
+    </div>
+</div>
+
+<!-- ==================== SERVICES ==================== -->
+<div class="section page-break">
+    <div class="accent-label">Our Services</div>
+    <h1 class="section-title">Comprehensive digital solutions engineered to scale your online presence and maximize ROI</h1>
+    <div class="yellow-bar"></div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Service</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="num">01</td>
+                <td class="title">Comprehensive Digital Marketing Strategy</td>
+                <td class="desc">End-to-end multi-channel marketing roadmaps aligned with your corporate objectives. Data-driven market positioning and competitor analysis.</td>
+            </tr>
+            <tr>
+                <td class="num">02</td>
+                <td class="title">Viral Campaign Strategy &amp; Execution</td>
+                <td class="desc">High-impact, shareable content concepts designed to capture cultural moments and trend algorithms. Engineered audience amplification framework for rapid organic reach.</td>
+            </tr>
+            <tr>
+                <td class="num">03</td>
+                <td class="title">Monthly Social Media Management</td>
+                <td class="desc">Consistent, turn-key management across all major social media platforms. Community management, scheduling, optimization, and monthly performance reporting.</td>
+            </tr>
+            <tr>
+                <td class="num">04</td>
+                <td class="title">Creative Content Production</td>
+                <td class="desc">Premium multi-media assets, visual storytelling, and high-conversion ad creatives. Integration of cutting-edge generative AI tools with high-end traditional production.</td>
+            </tr>
+            <tr>
+                <td class="num">05</td>
+                <td class="title">Brand Positioning &amp; Digital Storytelling</td>
+                <td class="desc">Crafting authentic brand narratives that resonate with target demographics and build trust. Establishing a consistent, authoritative voice across the digital ecosystem.</td>
+            </tr>
+            <tr>
+                <td class="num">06</td>
+                <td class="title">Research-Driven Marketing Strategy</td>
+                <td class="desc">Advanced consumer behavior insights, sentiment analysis, and performance analytics. Continuous optimization based on full-funnel data to ensure maximum campaign efficiency.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ==================== PORTFOLIO ==================== -->
+<div class="section page-break">
+    <div class="accent-label">Our Portfolio &amp; Client Ecosystem</div>
+    <h1 class="section-title">Work That Speaks</h1>
+    <div class="yellow-bar"></div>
+    <p style="margin-bottom:6mm;">Driving growth, digital transformation, and engagement for leading brands across diverse industries, including e-commerce, education, healthcare, and entertainment.</p>
+    
+    <div class="portfolio-item">
+        <div>
+            <div class="portfolio-name">Mirror Mirror</div>
+            <div class="portfolio-industry">E-Commerce &amp; Retail</div>
+        </div>
+        <div class="portfolio-industry">mirrormirror.lk</div>
+    </div>
+    <div class="portfolio-item">
+        <div>
+            <div class="portfolio-name">Tractors.lk</div>
+            <div class="portfolio-industry">Automotive &amp; Industrial</div>
+        </div>
+        <div class="portfolio-industry">tractors.lk</div>
+    </div>
+    <div class="portfolio-item">
+        <div>
+            <div class="portfolio-name">Ambalama</div>
+            <div class="portfolio-industry">Hospitality &amp; Leisure</div>
+        </div>
+        <div class="portfolio-industry">ambalama.lk</div>
+    </div>
+    <div class="portfolio-item">
+        <div>
+            <div class="portfolio-name">Academy of Business &amp; Technology</div>
+            <div class="portfolio-industry">Higher EdTech</div>
+        </div>
+        <div class="portfolio-industry">eduabt.com</div>
+    </div>
+    <div class="portfolio-item">
+        <div>
+            <div class="portfolio-name">Digital Health Sync (DHS)</div>
+            <div class="portfolio-industry">Health-Tech</div>
+        </div>
+        <div class="portfolio-industry">digitalhealthsync.com</div>
+    </div>
+    <div class="portfolio-item">
+        <div>
+            <div class="portfolio-name">MaxaMaxa</div>
+            <div class="portfolio-industry">Media &amp; Entertainment</div>
+        </div>
+        <div class="portfolio-industry">facebook.com/share/1BCcF6Rb2C</div>
+    </div>
+    <div class="portfolio-item">
+        <div>
+            <div class="portfolio-name">Mata Oya Mage Pana Wage</div>
+            <div class="portfolio-industry">Creative Video Production</div>
+        </div>
+        <div class="portfolio-industry">youtube.com</div>
+    </div>
+</div>
+
+<!-- ==================== LEADERSHIP ==================== -->
+<div class="section page-break">
+    <div class="accent-label">Executive Leadership</div>
+    <h1 class="section-title">The mind behind the momentum</h1>
+    <div class="yellow-bar"></div>
+    
+    <div class="leader-card">
+        <img src="/mnt/agents/output/app/public/images/dilum.jpg" alt="Dilum Peiris" class="leader-photo">
+        <div class="leader-info">
+            <div class="label">Chief Digital Officer</div>
+            <h2 style="margin-top:1mm;">Dilum Peiris</h2>
+            <p>A visionary Digital Strategist and creative innovator with over a decade of experience building robust brand ecosystems and driving high-performing cross-platform campaigns. Dilum seamlessly blends cutting-edge generative AI tools with core digital marketing methodologies, specializing in scalable growth strategies and data-driven full-funnel campaigns. His deep-rooted background as an award-winning music producer and creative director infuses authentic visual storytelling into every project.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== CONTACT ==================== -->
+<div class="section page-break">
+    <div class="accent-label">Contact Us</div>
+    <h1 class="section-title">Ready to scale your digital footprint?</h1>
+    <div class="yellow-bar"></div>
+    <p>Let's collaborate to build your brand's next major milestone. We're here to turn your vision into a viral reality.</p>
+    
+    <div class="contact-box">
+        <div class="contact-row">
+            <span class="contact-label">Company</span>
+            <span>ViralCraft | A Digital Research Institute Pvt. Ltd. Company</span>
+        </div>
+        <div class="contact-row">
+            <span class="contact-label">Address</span>
+            <span>14, Sir Baron Jayathilake Mawatha, Colombo, Sri Lanka, 00100</span>
+        </div>
+        <div class="contact-row">
+            <span class="contact-label">Phone</span>
+            <span>+94 77 903 3333</span>
+        </div>
+        <div class="contact-row">
+            <span class="contact-label">Email</span>
+            <span>theviralcraftstudio@gmail.com</span>
+        </div>
+    </div>
+    
+    <h2>Connect With Us</h2>
+    <div class="two-col">
+        <div>
+            <p><strong>Dilum Peiris</strong> &mdash; Chief Digital Officer</p>
+            <p style="font-size:9pt; color:#666;">Digital Strategy, Creative Direction, Growth Marketing</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="doc-footer">
+    <p>ViralCraft | A Digital Research Institute Pvt. Ltd. Company | www.viralcraftstudio.com</p>
+</div>
+
+</body>
+</html>
